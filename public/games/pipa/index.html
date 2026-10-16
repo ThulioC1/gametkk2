@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pipa Arena - TikTok Live Games</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- OBS Overlay: transparent background, canvas fills viewport -->
+
+    <!-- Sky Canvas -->
+    <canvas id="skyCanvas"></canvas>
+
+    <!-- HUD Overlay (DOM) -->
+    <div id="hud">
+      <!-- Phase Banner (top center) -->
+      <div id="phaseBanner" class="phase-banner">
+        <span id="phaseText">Carregando...</span>
+        <span id="phaseTimer"></span>
+      </div>
+
+      <!-- Stats (top left) -->
+      <div id="stats">
+        <div class="stat-line">
+          🪁 <span class="stat-label">PIPAS NO CÉU:</span>
+          <span id="skyCount" class="stat-value">0</span>
+        </div>
+        <div class="stat-line">
+          🔄 <span class="stat-label">RODADA:</span>
+          <span id="roundCount" class="stat-value">1</span>
+        </div>
+      </div>
+
+      <!-- Leaderboard (top right) -->
+      <div id="leaderboard"></div>
+
+      <!-- How to play legend (bottom left) -->
+      <div id="legend">
+        <div id="legendTitle" class="legend-title"></div>
+        <div id="legendList"></div>
+      </div>
+
+      <!-- Event Feed (bottom right) -->
+      <div id="eventFeed"></div>
+
+      <!-- Winner Overlay (hidden until finish) -->
+      <div id="winnerOverlay" class="winner-overlay hidden">
+        <div class="winner-content">
+          <div class="winner-crown">🏆</div>
+          <div class="winner-line">
+            <span id="winnerColor" class="winner-color"></span>
+            <span id="winnerName" class="winner-name"></span>
+          </div>
+          <div id="winnerSub" class="winner-sub"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Dependencies -->
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/lib/tiktok-bridge.js"></script>
+    <script src="config.js"></script>
+    <script src="kite-engine.js"></script>
+    <script src="game.js"></script>
+  </body>
+</html>

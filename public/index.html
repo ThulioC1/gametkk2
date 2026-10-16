@@ -1,0 +1,194 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TikTok Live Games - Interactive Overlay Platform</title>
+    <meta
+      name="description"
+      content="Create game overlays for your TikTok Live. Increase viewer engagement with real-time mini-games."
+    />
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fira+Code&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="/css/styles.css" />
+  </head>
+  <body>
+    <!-- ==========================================
+         HEADER
+         ========================================== -->
+    <header class="header">
+      <div class="container">
+        <div class="header-content">
+          <a href="/" class="logo">
+            <div class="logo-icon">🎮</div>
+            <span>TikTok Live Games</span>
+          </a>
+          <nav class="nav-links">
+            <a href="#games" class="nav-link">Games</a>
+            <a href="/debug.html" class="nav-link">Debug</a>
+            <a href="/api/stats" class="nav-link" target="_blank">Stats</a>
+          </nav>
+        </div>
+      </div>
+    </header>
+
+    <!-- ==========================================
+         HERO SECTION
+         ========================================== -->
+    <section class="hero">
+      <div class="container">
+        <h1 class="hero-title">Create Game Overlays for TikTok Live</h1>
+        <p class="hero-subtitle">
+          Turn your livestream into an interactive experience. Viewers send gifts to play games in
+          real-time while you stream!
+        </p>
+      </div>
+    </section>
+
+    <!-- ==========================================
+         MAIN DASHBOARD CARD
+         ========================================== -->
+    <main class="container">
+      <div class="glass-card">
+        <!-- Step 1: Input Username -->
+        <div class="form-group">
+          <label for="username" class="form-label"> 📱 Your TikTok Username </label>
+          <input
+            type="text"
+            id="username"
+            class="form-input"
+            placeholder="Ex: streamer_vn (no @ needed)"
+            autocomplete="off"
+          />
+        </div>
+
+        <!-- Step 2: Select Game -->
+        <div class="form-group" id="games">
+          <label class="form-label"> 🎯 Select Game for Stream </label>
+          <div class="game-grid">
+            <!-- Horse Racing Game Card -->
+            <div
+              class="game-card selected"
+              data-game="horse-racing"
+              data-entry="index.html"
+              data-param="id"
+            >
+              <span class="game-card-badge">NEW</span>
+              <div class="game-card-icon">🏇</div>
+              <h3 class="game-card-title">Horse Racing</h3>
+              <p class="game-card-desc">
+                Viewers send gifts to move horses! Each gift powers a different lane. First horse to
+                the finish line wins!
+              </p>
+            </div>
+
+            <!-- Corrida na Live Game Card -->
+            <div
+              class="game-card"
+              data-game="corrida"
+              data-entry="index.html"
+              data-param="id"
+            >
+              <span class="game-card-badge">NEW</span>
+              <div class="game-card-icon">🏎️</div>
+              <h3 class="game-card-title">Corrida na Live</h3>
+              <p class="game-card-desc">
+                Comente e entre na pista! Likes aceleram seu carro e presentes viram nitro,
+                turbo, óleo e ultrapassagem. Primeiro a cruzar a linha vence!
+              </p>
+            </div>
+
+            <!-- Pipa Arena Game Card -->
+            <div
+              class="game-card"
+              data-game="pipa"
+              data-entry="index.html"
+              data-param="id"
+            >
+              <span class="game-card-badge">NEW</span>
+              <div class="game-card-icon">🪁</div>
+              <h3 class="game-card-title">Pipa Arena</h3>
+              <p class="game-card-desc">
+                Cada comentário solta uma pipa no céu. Likes puxam a linha e presentes cortam
+                a pipa dos rivais. Quem domina o céu vence a rodada!
+              </p>
+            </div>
+
+            <!-- Future Expansion Placeholder -->
+            <div class="game-card" style="opacity: 0.5; cursor: not-allowed">
+              <div class="game-card-icon">🎰</div>
+              <h3 class="game-card-title">Wheel of Fortune</h3>
+              <p class="game-card-desc">
+                Coming Soon! Spin the wheel with gifts for prizes and surprises.
+              </p>
+            </div>
+
+            <div class="game-card" style="opacity: 0.5; cursor: not-allowed">
+              <div class="game-card-icon">🧩</div>
+              <h3 class="game-card-title">Quiz Battle</h3>
+              <p class="game-card-desc">Coming Soon! Chat-based trivia battles between viewers.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 3: Generate Button -->
+        <div class="form-group">
+          <button type="button" id="generateBtn" class="btn btn-primary">
+            ✨ Generate Game Link
+          </button>
+        </div>
+
+        <!-- Step 4: Output Section (hidden until generated) -->
+        <div class="output-section" id="outputSection">
+          <p class="output-label">🔗 Overlay Link for OBS / TikTok Studio:</p>
+          <div class="output-wrapper">
+            <input type="text" id="outputUrl" class="output-input" readonly />
+            <button type="button" id="copyBtn" class="btn btn-copy">📋 Copy</button>
+          </div>
+          <div
+            style="
+              margin-top: 20px;
+              padding: 16px;
+              background: rgba(37, 244, 238, 0.1);
+              border-radius: 12px;
+              border-left: 4px solid var(--accent-cyan);
+            "
+          >
+            <strong style="color: var(--accent-cyan)">💡 Instructions:</strong>
+            <ol style="margin-top: 10px; margin-left: 20px; color: var(--text-secondary)">
+              <li>Copy the link above</li>
+              <li>Open OBS or TikTok Studio</li>
+              <li>Add a new Browser Source</li>
+              <li>Paste the link into the URL field</li>
+              <li>Set dimensions: 1920x1080 (or custom)</li>
+              <li>Start livestreaming — viewers send gifts to race!</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- ==========================================
+         FOOTER
+         ========================================== -->
+    <footer class="footer">
+      <div class="container">
+        <p>TikTok Live Games v2 &copy; 2026 | Made with 💖 for Streamers Worldwide</p>
+      </div>
+    </footer>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">✅ Link copied!</div>
+
+    <!-- Scripts -->
+    <script src="/js/dashboard.js"></script>
+  </body>
+</html>

@@ -1,0 +1,267 @@
+/**
+ * style.css
+ * Horse Racing OBS overlay styles.
+ * Transparent background — only race elements are visible in OBS.
+ */
+
+/* ==========================================
+   RESET & BASE
+   ========================================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: transparent;
+  font-family: "Segoe UI", "Inter", system-ui, sans-serif;
+  color: #fff;
+}
+
+/* ==========================================
+   CANVAS — fills entire viewport
+   ========================================== */
+#raceCanvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+/* ==========================================
+   HUD — sits on top of canvas
+   ========================================== */
+#hud {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  pointer-events: none;
+}
+
+/* ==========================================
+   PHASE BANNER — top center
+   ========================================== */
+.phase-banner {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(8px);
+  padding: 10px 30px;
+  border-radius: 12px;
+  font-size: 22px;
+  font-weight: 700;
+  text-align: center;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+#phaseTimer {
+  font-variant-numeric: tabular-nums;
+  color: #ffd700;
+  min-width: 40px;
+}
+
+/* ==========================================
+   LANE LABELS — left side, vertically stacked
+   ========================================== */
+#laneLabels {
+  position: absolute;
+  top: 50%;
+  left: 15px;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.lane-label {
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(6px);
+  padding: 10px 16px;
+  border-radius: 10px;
+  font-weight: 600;
+  border-left: 5px solid;
+  white-space: nowrap;
+  min-width: 240px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.lane-label .lane-top {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.lane-label .lane-flag {
+  font-size: 22px;
+}
+
+.lane-label .lane-name {
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.lane-label .lane-vote {
+  font-size: 11px;
+  font-weight: 600;
+  background: rgba(255, 255, 255, 0.15);
+  color: #ffd700;
+  padding: 2px 6px;
+  border-radius: 4px;
+  letter-spacing: 0.5px;
+}
+
+.lane-label .lane-dist {
+  margin-left: auto;
+  font-variant-numeric: tabular-nums;
+  font-size: 15px;
+  font-weight: 700;
+  color: #ffd700;
+}
+
+.lane-label .lane-gifts {
+  display: flex;
+  gap: 6px;
+  font-size: 26px;
+  line-height: 1.1;
+  filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.7));
+}
+
+/* ==========================================
+   EVENT FEED — bottom right
+   ========================================== */
+#eventFeed {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  width: 320px;
+  max-height: 220px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.feed-item {
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(4px);
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 13px;
+  animation: fadeIn 0.3s ease;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.feed-item.gift {
+  border-left: 3px solid #f4a;
+}
+.feed-item.vote {
+  border-left: 3px solid #ffd700;
+}
+.feed-item.chat {
+  border-left: 3px solid #4af;
+}
+.feed-item.like {
+  border-left: 3px solid #af4;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* ==========================================
+   WINNER OVERLAY
+   ========================================== */
+.winner-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  animation: fadeIn 0.5s ease;
+}
+
+.winner-overlay.hidden {
+  display: none;
+}
+
+.winner-content {
+  text-align: center;
+  animation: popIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.winner-emoji {
+  font-size: 80px;
+  margin-bottom: 10px;
+}
+
+.winner-name {
+  font-size: 48px;
+  font-weight: 800;
+  text-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+  margin-bottom: 8px;
+}
+
+.winner-supporters {
+  font-size: 18px;
+  opacity: 0.8;
+}
+
+@keyframes popIn {
+  from {
+    transform: scale(0.5);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* ==========================================
+   COUNTDOWN PULSE
+   ========================================== */
+.phase-banner.countdown {
+  animation: pulse 1s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    transform: translateX(-50%) scale(1);
+  }
+  50% {
+    transform: translateX(-50%) scale(1.05);
+  }
+}

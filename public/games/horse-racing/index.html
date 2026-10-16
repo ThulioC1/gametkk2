@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Horse Racing - TikTok Live Games</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- OBS Overlay: transparent background, canvas fills viewport -->
+
+    <!-- Race Canvas -->
+    <canvas id="raceCanvas"></canvas>
+
+    <!-- HUD Overlay (DOM) -->
+    <div id="hud">
+      <!-- Phase Banner -->
+      <div id="phaseBanner" class="phase-banner">
+        <span id="phaseText">Waiting for gifts...</span>
+        <span id="phaseTimer"></span>
+      </div>
+
+      <!-- Lane Labels (left side) -->
+      <div id="laneLabels"></div>
+
+      <!-- Event Feed (bottom-right) -->
+      <div id="eventFeed"></div>
+
+      <!-- Winner Overlay (hidden until finish) -->
+      <div id="winnerOverlay" class="winner-overlay hidden">
+        <div class="winner-content">
+          <div id="winnerEmoji" class="winner-emoji"></div>
+          <div id="winnerName" class="winner-name"></div>
+          <div id="winnerSupporters" class="winner-supporters"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Dependencies -->
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/lib/tiktok-bridge.js"></script>
+    <script src="config.js"></script>
+    <script src="race-engine.js"></script>
+    <script src="game.js"></script>
+  </body>
+</html>
